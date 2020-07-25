@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import Clock from './Clock/Clock'
+import ChangeButton from './ChangeButton/ChangeButton'
 
 class App extends Component {
   state = {
-    active: 'clock',
+    active: 'Clock',
     time: this.getTime()
   }
 
@@ -34,10 +35,26 @@ class App extends Component {
     clearInterval(this.intervalIndex)
   }
 
+  handleChangeActive = (action) => {
+    this.setState({
+      active: action
+    })
+  }
+
   render() {
     return (
       <>
-        <Clock time={this.state.time} />
+        {this.state.active === "Clock" ? <Clock time={this.state.time} /> : "Stopwatch"}
+        <ChangeButton
+          active={this.state.active}
+          action="Clock"
+          click={this.handleChangeActive}
+        />
+        <ChangeButton
+          active={this.state.active}
+          action="Stopwatch"
+          click={this.handleChangeActive}
+        />
       </>
     )
   }
