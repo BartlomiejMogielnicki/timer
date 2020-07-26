@@ -31,14 +31,16 @@ class App extends Component {
     this.intervalIndex = setInterval(this.setTime.bind(this), 1000)
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalIndex)
-  }
-
   handleChangeActive = (action) => {
     this.setState({
       active: action
     })
+
+    if (action === "Clock") {
+      this.intervalIndex = setInterval(this.setTime.bind(this), 1000)
+    } else {
+      clearInterval(this.intervalIndex)
+    }
   }
 
   render() {
